@@ -62,16 +62,16 @@ class R2Point:
                 a, b = b, a
             if R2Point.is_top(c):
                 a, c = c, a
-            area = R2Point.area(a, R2Point.find_x_point(a, b),
-                                R2Point.find_x_point(a, c))
+            k = R2Point.find_x_point(a, c)
+            area = R2Point.area(a, R2Point.find_x_point(a, b), k)
         else:
             if not R2Point.is_top(b):
                 a, b = b, a
             if not R2Point.is_top(c):
                 a, c = c, a
-            area = R2Point.area(b, c, R2Point.find_x_point(c, a)) +
-            + R2Point.area(b, R2Point.find_x_point(a, c),
-                           R2Point.find_x_point(a, b))
+            v = R2Point.find_x_point(a, c)
+            r = R2Point.area(b, v, R2Point.find_x_point(a, b))
+            area = R2Point.area(b, c, R2Point.find_x_point(c, a)) + r
         return abs(area)
 
 

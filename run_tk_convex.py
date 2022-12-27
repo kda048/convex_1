@@ -37,7 +37,8 @@ try:
         f = f.add(R2Point())
         tk.clean()
         f.draw(tk)
-        print(f"S = {f.area()}, P = {f.perimeter()}\n, top area = {f.area_top()}")
+        print(f"S = {f.area()}, P = {f.perimeter()}"
+              f"top area = {f.area_top()}")
 except(EOFError, KeyboardInterrupt):
     print("\nStop")
     tk.close()

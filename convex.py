@@ -91,20 +91,18 @@ class Polygon(Figure):
 
             # учёт удаления ребра, соединяющего конец и начало дека
             self._perimeter -= self.points.first().dist(self.points.last())
-            self._area += abs(R2Point.area(t,
-                                           self.points.last(),
-                                           self.points.first()))
-            self._area_top += R2Point.top_area_of_triangle(t,
-                                                           self.points.last(),
-                                                           self.points.first())
-
+            m = R2Point.area(t, self.points.last(), self.points.first())
+            self._area += abs(m)
+            h = self.points.first()
+            n = R2Point.top_area_of_triangle(t, self.points.last(), h)
+            self._area_top += n
             # удаление освещённых рёбер из начала дека
             p = self.points.pop_first()
             while t.is_light(p, self.points.first()):
                 self._perimeter -= p.dist(self.points.first())
                 self._area += abs(R2Point.area(t, p, self.points.first()))
-                self._area_top +=
-                R2Point.top_area_of_triangle(t, p, self.points.first())
+                o = R2Point.top_area_of_triangle(t, p, self.points.first())
+                self._area_top += o
                 p = self.points.pop_first()
             self.points.push_first(p)
 
@@ -113,14 +111,14 @@ class Polygon(Figure):
             while t.is_light(self.points.last(), p):
                 self._perimeter -= p.dist(self.points.last())
                 self._area += abs(R2Point.area(t, p, self.points.last()))
-                self._area_top +=
-                R2Point.top_area_of_triangle(t, p, self.points.last())
+                o = R2Point.top_area_of_triangle(t, p, self.points.last())
+                self._area_top += o
                 p = self.points.pop_last()
             self.points.push_last(p)
 
             # добавление двух новых рёбер
-            self._perimeter += t.dist(self.points.first()) + \
-                t.dist(self.points.last())
+            g = t.dist(self.points.first())
+            self._perimeter += g + t.dist(self.points.last())
             self.points.push_first(t)
         return self
 
